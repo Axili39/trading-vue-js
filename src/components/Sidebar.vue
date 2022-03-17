@@ -4,7 +4,6 @@
 import Sidebar from './js/sidebar.js'
 import Canvas from '../mixins/canvas.js'
 
-import { h } from 'vue'
 
 export default {
     name: 'Sidebar',

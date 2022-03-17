@@ -1,47 +1,43 @@
 <template>
-    <trading-vue :data="chart" :width="this.width" :height="this.height"
+    <trading-vue
+        :data="chart"
+        :width="width"
+        :height="height"
         :color-back="colors.colorBack"
         :color-grid="colors.colorGrid"
-        :color-text="colors.colorText">
-    </trading-vue>
+        :color-text="colors.colorText"
+    ></trading-vue>
 </template>
 
-<script>
+<script setup>
+import { reactive, onMounted, computed } from 'vue'
 import TradingVue from './TradingVue.vue'
 import Data from '../data/data.json'
 import DataCube from '../src/helpers/datacube.js'
 
-export default {
-    name: 'app',
-    components: {
-        TradingVue
-    },
-    methods: {
-        onResize() {
-            this.width = window.innerWidth
-            this.height = window.innerHeight
-        }
-    },
-    mounted() {
-        window.addEventListener('resize', this.onResize)
-        window.dc = this.chart
-    },
-    beforeUnmount() {
-        window.removeEventListener('resize', this.onResize)
-    },
-    data() {
-        return {
-            chart: new DataCube(Data),
-            width: window.innerWidth,
-            height: window.innerHeight,
-            colors: {
-                colorBack: '#fff',
-                colorGrid: '#eee',
-                colorText: '#333',
-            }
-        };
-    }
-};
+const chart = ref(new DataCube(Data))
+const width = ref(window.innerWidth)
+const height = ref(window.innerHeight)
+const colors = ref({
+    colorBack: '#fff',
+    colorGrid: '#eee',
+    colorText: '#333',
+})
+
+onMounted(() => {
+    window.addEventListener('resize', onResize)
+    window.dc = this.chart
+})
+
+beforeUnmount(() => {
+    window.removeEventListener('resize', onResize)
+})
+
+onResize(() => {
+    width.value = window.innerWidth
+    height.value = window.innerHeight
+})
+
 </script>
 
 <style>

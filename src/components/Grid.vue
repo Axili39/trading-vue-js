@@ -20,7 +20,6 @@ import Splitters from "./overlays/Splitters.vue"
 import LineTool from "./overlays/LineTool.vue"
 import RangeTool from "./overlays/RangeTool.vue"
 
-import { h } from 'vue'
 
 export default {
     name: 'Grid',

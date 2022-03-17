@@ -4,8 +4,6 @@
 import Botbar from './js/botbar.js'
 import Canvas from '../mixins/canvas.js'
 
-import { h } from 'vue'
-
 export default {
     name: 'Botbar',
     props: [
